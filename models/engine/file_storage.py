@@ -10,9 +10,15 @@ class FileStorage:
 
     def all(self, cls=None):
         """Returns a dictionary of models currently in storage"""
-        if cls == None:
-            return FileStorage.__objects
-        #elif
+        if cls != None:
+            if type(cls) == str:
+                cls = eval(cls)
+            cls_dict = {}
+            for i, j in self.__objects.items():
+                if type(j) == cls:
+                    cls_dict[i] = k
+            return (cls_dict)
+        return self.__objects
 
 
     def new(self, obj):
@@ -39,8 +45,9 @@ class FileStorage:
         from models.review import Review
 
     def delete(self, obj=None):
+        """Deletes an object if it exists in __objects"""
         if obj != None:
-            del self.__objects[obj]
+            del self.__objects["{}.{}".format(type(obj).__name__, obj.id)]
 
         classes = {
                     'BaseModel': BaseModel, 'User': User, 'Place': Place,
