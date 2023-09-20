@@ -2,6 +2,12 @@
 """This module defines a class to manage file storage for hbnb clone"""
 import json
 from models.base_model import BaseModel
+from models.amenity import Amenity
+from models.city import City
+from models.place import Place
+from models.review import Review
+from models.state import State
+from models.user import User
 
 
 class FileStorage:
@@ -17,7 +23,7 @@ class FileStorage:
             cls_dict = {}
             for i, j in self.__objects.items():
                 if type(j) == cls:
-                    cls_dict[i] = k
+                    cls_dict[i] = j
             return (cls_dict)
         return self.__objects
 
