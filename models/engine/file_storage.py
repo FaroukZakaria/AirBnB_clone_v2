@@ -53,8 +53,10 @@ class FileStorage:
 
     def delete(self, obj=None):
         """Deletes an object if it exists in __objects"""
-        if obj != None:
+        try:
             del self.__objects["{}.{}".format(type(obj).__name__, obj.id)]
+        except (AttributeError, KeyError):
+            pass
 
         classes = {
                     'BaseModel': BaseModel, 'User': User, 'Place': Place,
