@@ -12,7 +12,7 @@ class FileStorage:
         """Returns a dictionary of models currently in storage"""
         if cls == None:
             return FileStorage.__objects
-        elif 
+        #elif
 
 
     def new(self, obj):
