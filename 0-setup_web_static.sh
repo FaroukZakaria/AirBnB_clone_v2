@@ -2,6 +2,7 @@
 # preparation of web server
 sudo apt-get -y update
 sudo apt-get -y upgrade
+sudo apt install nginx
 sudo apt-get -y install nginx
 web_static_dir="/data/web_static"
 releases_dir="$web_static_dir/releases/test"
