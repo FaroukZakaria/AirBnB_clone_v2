@@ -1,19 +1,15 @@
 #!/usr/bin/env bash
 # preparation of web server
-if ! command -v nginx &> /dev/null; then
-	apt-get -y update
-	apt-get -y install nginx
-fi
+sudo apt-get -y update
+sudo apt-get -y upgrade
+sudo apt-get -y install nginx
 web_static_dir="/data/web_static"
 releases_dir="$web_static_dir/releases/test"
 shared_dir="$web_static_dir/shared"
 current_dir="$web_static_dir/current"
-mkdir -p "$web_static_dir" "$releases_dir" "$shared_dir" "$releases_dir" "$current_dir"
-echo "<html><head></head><body>Test HTML file</body></html>" > "$releases_dir/index.html"
-ln -sfT "$releases_dir" "$current_dir"
-chown -R ubuntu:ubuntu "$web_static_dir"
-nginx_config="/etc/nginx/sites-available/default"
-nginx_alias_config="location /hbnb_static { alias $current_dir/; }"
-grep -qF "$nginx_alias_config" "$nginx_config" && sed -i "/$nginx_alias_config/d" "$nginx_config"
-echo "$nginx_alias_config" >> "$nginx_config"
-service nginx restart
+sudo mkdir -p "$web_static_dir" "$releases_dir" "$shared_dir" "$releases_dir" "$current_dir"
+echo "TEST" | sudo tee "$releases_dir/index.html"
+sudo ln -sf "$releases_dir" "$current_dir"
+sudo chown -hR ubuntu:ubuntu /data/
+sudo sed -i '38i\\tlocation /hbnb_static/ {\n\t\talias /data/web_static/current/;\n\t}\n' /etc/nginx/sites-available/default
+sudo service nginx restart
