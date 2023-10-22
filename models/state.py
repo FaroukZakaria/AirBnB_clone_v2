@@ -19,7 +19,6 @@ class State(BaseModel):
     else:
         name = ""
 
-
         @property
         def cities(self):
             """getter for cities"""
