@@ -32,7 +32,6 @@ def python_variable(text='is cool'):
 def number(n):
     if isinstance(n, int):
         return '{} is a number'.format(n)
-    return
 
 
 if __name__ == '__main__':
