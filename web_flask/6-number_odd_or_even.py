@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """Triple display (variable text in third)"""
-from flask import Flask, request, render_template
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
@@ -36,6 +36,12 @@ def number(n):
 @app.route('/number_template/<int:n>', strict_slashes=False)
 def number_template(n):
     return render_template('5-number.html', n=n)
+
+
+@app.route('/number_odd_or_even/<int:n>', strict_slashes=False)
+def number_even_or_odd(n):
+    OE = 'even' if n % 2 == 0 else 'odd'
+    return render_template('6-number_odd_or_even.html', n=n, OE=OE)
 
 
 if __name__ == '__main__':
